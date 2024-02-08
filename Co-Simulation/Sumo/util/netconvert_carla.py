@@ -473,7 +473,7 @@ def _netconvert_carla_impl(xodr_file, output, tmpdir, guess_tls=False):
     # ---------------
     # Modify sumo net
     # ---------------
-    parser = ET.XMLParser(remove_blank_text=True)
+    parser = ET.XMLParser(remove_blank_text=True, resolve_entities=False)
     tree = ET.parse(tmp_sumo_net, parser)
     root = tree.getroot()
 
