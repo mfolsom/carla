@@ -31,6 +31,7 @@ import lxml.etree as ET  # pylint: disable=import-error
 import glob
 import os
 import sys
+import lxml.etree
 
 try:
     sys.path.append(
@@ -474,7 +475,7 @@ def _netconvert_carla_impl(xodr_file, output, tmpdir, guess_tls=False):
     # Modify sumo net
     # ---------------
     parser = ET.XMLParser(remove_blank_text=True)
-    tree = ET.parse(tmp_sumo_net, parser)
+    tree = ET.parse(tmp_sumo_net, parser, parser=lxml.etree.XMLParser(resolve_entities=False))
     root = tree.getroot()
 
     for tl in tls.values():
