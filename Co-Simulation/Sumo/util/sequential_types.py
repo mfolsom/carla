@@ -21,6 +21,7 @@ import logging
 import random
 
 import lxml.etree as ET  # pylint: disable=import-error
+import lxml.etree
 
 # ==================================================================================================
 # -- load vtypes -----------------------------------------------------------------------------------
@@ -38,7 +39,7 @@ def main(route_files, vtypes, _random=False):
     Main method to automatically modify vtypes to carla type ids in sumo route files.
     """
     for filename in route_files:
-        tree = ET.parse(filename)
+        tree = ET.parse(filename, parser=lxml.etree.XMLParser(resolve_entities=False))
         root = tree.getroot()
 
         if not _random:

@@ -23,6 +23,7 @@ import traci  # pylint: disable=import-error
 from .constants import INVALID_ACTOR_ID
 
 import lxml.etree as ET  # pylint: disable=import-error
+import lxml.etree
 
 # ==================================================================================================
 # -- sumo definitions ------------------------------------------------------------------------------
@@ -293,7 +294,7 @@ def _get_sumo_net(cfg_file):
     """
     cfg_file = os.path.join(os.getcwd(), cfg_file)
 
-    tree = ET.parse(cfg_file)
+    tree = ET.parse(cfg_file, parser=lxml.etree.XMLParser(resolve_entities=False))
     tag = tree.find('//net-file')
     if tag is None:
         return None
